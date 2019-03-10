@@ -7,11 +7,13 @@ class TowerGroup extends React.Component {
     super(props);
     this.state = {
       towers: {
-        a: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        a: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
         b: [],
         c: []
-      }
+      },
+      moves: []
     };
+    this.solutionMoves(this.getMaxDiscWidth(), "a", "c", "b");
   }
 
   styles = {
@@ -23,8 +25,8 @@ class TowerGroup extends React.Component {
   };
 
   getMaxDiscWidth() {
-    var sizes = [];
     // Create a single list of all disk sizes
+    var sizes = [];
     Object.keys(this.state.towers).map(
       tower => (sizes = sizes.concat(this.state.towers[tower]))
     );
@@ -60,37 +62,35 @@ class TowerGroup extends React.Component {
     );
   }
 
-  handleClick() {
-    console.log("clicked");
-    this.solve(this.getMaxDiscWidth(), "a", "c", "b");
-  }
-
   renderButton() {
     return <Button onClick={() => this.handleClick()} />;
   }
 
-  async sleep(ms) {
+  async handleClick() {
+    var nextMove;
+    while ((nextMove = this.state.moves.pop())) {
+      await this.sleep(1);
+      console.log(nextMove);
+      var disk = this.state.towers[nextMove[0]].shift();
+      console.log(disk);
+      this.state.towers[nextMove[1]].unshift(disk);
+      this.setState({ towers: this.state.towers });
+    }
+  }
+
+  sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async solve(n, from_rod, to_rod, aux_rod) {
+  solutionMoves(n, from, to, aux) {
     if (n === 1) {
-      this.state.towers[to_rod].push(this.state.towers[from_rod].pop());
-      this.setState({ towers: this.state.towers });
-      console.log(
-        "Move disk " + n + " from rod " + from_rod + " to rod " + to_rod
-      );
+      this.state.moves.unshift([from, to]);
       return;
+    } else {
+      this.solutionMoves(n - 1, from, aux, to);
+      this.solutionMoves(1, from, to, aux);
+      this.solutionMoves(n - 1, aux, to, from);
     }
-    this.solve(n - 1, from_rod, aux_rod, to_rod);
-
-    this.state.towers[to_rod].push(this.state.towers[from_rod].pop());
-    this.setState({ towers: this.state.towers });
-    console.log(
-      "Move disk " + n + " from rod " + from_rod + " to rod " + to_rod
-    );
-
-    this.solve(n - 1, aux_rod, to_rod, from_rod);
   }
 }
 
