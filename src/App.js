@@ -8,6 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          Source: <a href="https://github.com/neutron37/hanoi">https://github.com/neutron37/hanoi</a>
           <TowerGroup />
         </header>
       </div>
