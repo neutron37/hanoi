@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/hanoi/static/js/runtime~main.797543c7.js"
   },
   {
-    "revision": "c61f218e3d60dd9db1a3",
-    "url": "/hanoi/static/js/main.0c3a6598.chunk.js"
+    "revision": "ecdeb26ee6c8ab801bb5",
+    "url": "/hanoi/static/js/main.2a996583.chunk.js"
   },
   {
     "revision": "53a7daeedaca1ce02b99",
     "url": "/hanoi/static/js/2.9d441f42.chunk.js"
   },
   {
-    "revision": "c61f218e3d60dd9db1a3",
+    "revision": "ecdeb26ee6c8ab801bb5",
     "url": "/hanoi/static/css/main.709227de.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/hanoi/static/css/2.1c85cfd4.chunk.css"
   },
   {
-    "revision": "cc2669e824da6a1463de3c3645cc2e01",
+    "revision": "b06a4cd8d4a5e1d6045fc6fc880c24d8",
     "url": "/hanoi/index.html"
   }
 ];
